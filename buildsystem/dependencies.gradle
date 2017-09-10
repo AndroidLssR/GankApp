@@ -1,0 +1,29 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+ext {
+    // Sdk and tools version
+    androidBuildToolsVersion = "25.0.1"
+    androidMinSdkVersion = 15
+    androidTargetSdkVersion = 24
+    androidCompileSdkVersion = 24
+
+    // App dependencies version
+    supportLibraryVersion = '25.1.1'
+    daggerVersion = '2.8'
+    butterknifeVersion = '8.4.0'
+    leakcanaryVersion = '1.5'
+    retrofitVersion = '2.1.0'
+    okhttpLogginInterceptorVersion = '3.3.1'
+    rxJavaVersion = '1.1.6'
+    rxAndroidVersion = '1.2.1'
+    rxLifecycleVersion = '1.0'
+    greendaoVersion = '3.1.1'
+    sqlcipherVersion = '3.5.4'
+    guavaVersion = '20.0'
+    diskLruCacheVersion = '2.0.2'
+	glideVersion = '3.7.0'
+}
