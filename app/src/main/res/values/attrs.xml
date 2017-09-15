@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--刷新控件-->
+    <declare-styleable name="RefreshLayout">
+        <attr name="enable_refresh" format="boolean"/>
+        <attr name="enable_load_more" format="boolean"/>
+    </declare-styleable>
+
+</resources>

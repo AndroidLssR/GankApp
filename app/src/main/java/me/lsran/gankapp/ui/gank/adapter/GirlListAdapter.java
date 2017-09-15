@@ -30,10 +30,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class GirlListAdapter extends RecyclerView.Adapter<GirlListAdapter.GankViewHolder> {
 
-    private List<GankDataModel.ResultsBean> girlCollection;
+    private List<GankDataModel> girlCollection;
     private LayoutInflater layoutInflater;
 
-    private PublishSubject<GankDataModel.ResultsBean> onClickSubject = PublishSubject.create();
+    private PublishSubject<GankDataModel> onClickSubject = PublishSubject.create();
 
     @Inject
     public GirlListAdapter(Activity context) {
@@ -43,42 +43,60 @@ public class GirlListAdapter extends RecyclerView.Adapter<GirlListAdapter.GankVi
 
     @Override
     public GirlListAdapter.GankViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View view = layoutInflater.inflate(R.layout.item_gank, parent, false);
+        final View view = layoutInflater.inflate(R.layout.item_girl, parent, false);
         return new GankViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(GankViewHolder viewHolder, int position) {
-       final GankDataModel.ResultsBean resultsBean = girlCollection.get(position);
+        final GankDataModel resultsBean = girlCollection.get(position);
         Glide.with(layoutInflater.getContext())
                 .load(resultsBean.getUrl())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(viewHolder.mImage);
+
         viewHolder.itemView.setOnClickListener(view -> onClickSubject.onNext(resultsBean));
+        viewHolder.itemView.setOnLongClickListener(v -> {
+            onClickSubject.onNext(resultsBean);
+            return false;
+        });
     }
 
     @Override
     public int getItemCount() {
-        return girlCollection != null ? girlCollection.size() : 0;
+        return girlCollection == null ? 0 : girlCollection.size();
     }
 
     /**
      * 设置图片列表集合
-     *
-     * @param girlCollection 图片列表
      */
-    public void setGirlCollection(Collection<GankDataModel.ResultsBean> girlCollection) {
+    public void setGirlCollection(Collection<GankDataModel> girlCollection) {
         checkNotNull(girlCollection);
-        this.girlCollection = (List<GankDataModel.ResultsBean>) girlCollection;
+        this.girlCollection.clear();
+        this.girlCollection = (List<GankDataModel>) girlCollection;
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 添加图片数据
+     */
+    public void addGirlCollection(Collection<GankDataModel> girlCollection) {
+        checkNotNull(girlCollection);
+        this.girlCollection.addAll(girlCollection);
         notifyDataSetChanged();
     }
 
     /**
      * 获取item点击事件
-     *
-     * @return the observable
      */
-    public Observable<GankDataModel.ResultsBean> getPositionClicks() {
+    public Observable<GankDataModel> getPositionClicks() {
+        return onClickSubject.asObservable();
+    }
+
+    /**
+     * 获取item长按事件
+     */
+    public Observable<GankDataModel> getPositionLongClicks(){
         return onClickSubject.asObservable();
     }
 

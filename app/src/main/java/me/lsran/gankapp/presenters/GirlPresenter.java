@@ -10,8 +10,8 @@ import javax.inject.Inject;
 import me.lsran.gankapp.data.DefaultSubscriber;
 import me.lsran.gankapp.data.repository.GankRepository;
 import me.lsran.gankapp.internal.di.PerActivity;
-import me.lsran.gankapp.model.GankDataModel;
-import me.lsran.gankapp.ui.gank.view.GankListView;
+import me.lsran.gankapp.model.GankApiModel;
+import me.lsran.gankapp.ui.view.ListView;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static me.lsran.gankapp.utils.Logger.LOGE;
@@ -28,7 +28,7 @@ public class GirlPresenter {
 
     private GankRepository repository;
 
-    private GankListView viewGankListView;
+    private ListView gankListView;
 
     private int pageNum = 1;
 
@@ -37,8 +37,8 @@ public class GirlPresenter {
         this.repository = repository;
     }
 
-    public void setView(@NonNull GankListView view) {
-        this.viewGankListView = checkNotNull(view);
+    public void setView(@NonNull ListView view) {
+        this.gankListView = checkNotNull(view);
     }
 
     /**
@@ -46,7 +46,7 @@ public class GirlPresenter {
      */
     private void getData() {
         repository.getGankData(pageNum)
-                .compose(((RxAppCompatActivity) viewGankListView.context()).bindToLifecycle())
+                .compose(((RxAppCompatActivity) gankListView.context()).bindToLifecycle())
                 .subscribe(new GetGankListSubscriber());
     }
 
@@ -69,25 +69,30 @@ public class GirlPresenter {
     /**
      * API获取房源列表订阅者
      */
-    private final class GetGankListSubscriber extends DefaultSubscriber<Optional<GankDataModel>> {
+    private final class GetGankListSubscriber extends DefaultSubscriber<Optional<GankApiModel>> {
         @Override
         public void onCompleted() {
             super.onCompleted();
-            viewGankListView.cancelRefreshView();
+            gankListView.cancelRefreshView();
         }
 
         @Override
         public void onError(Throwable e) {
             super.onError(e);
             LOGE(TAG, e.getMessage());
-            viewGankListView.cancelRefreshView();
+            gankListView.cancelRefreshView();
         }
 
         @Override
-        public void onNext(Optional<GankDataModel> listOptional) {
+        public void onNext(Optional<GankApiModel> listOptional) {
             super.onNext(listOptional);
             if (listOptional.isPresent()) {
-                viewGankListView.showHouseCollectionInView(listOptional.get());
+                // 刷新与加载
+                if(gankListView.getItemCountInView() > 0) {
+                    gankListView.addCollectionInView(listOptional.get());
+                } else {
+                    gankListView.setCollectionInView(listOptional.get());
+                }
             }
         }
     }

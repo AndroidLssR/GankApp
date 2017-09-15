@@ -3,21 +3,30 @@
     package="me.lsran.gankapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
-        android:allowBackup="false"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="false"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.gank.GirlActivity">
+
+        <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <activity android:name=".ui.gank.activity.GirlActivity"
+            android:label="@string/girl"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.gank.activity.ImageBrowserActivity"
+            android:label="@string/image_browser"
+            android:screenOrientation="portrait"/>
+    </application>
 </manifest>

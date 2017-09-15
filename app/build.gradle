@@ -4,16 +4,16 @@ apply plugin: 'com.jakewharton.butterknife'
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
 
-    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
-    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+    buildToolsVersion globalConfiguration["androidBuildToolsVersion"]
 
     defaultConfig {
-        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
-        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
 
-        applicationId globalConfiguration.getAt("androidApplicationId")
-        versionCode globalConfiguration.getAt("androidVersionCode")
-        versionName globalConfiguration.getAt("androidVersionName")
+        applicationId globalConfiguration["androidApplicationId"]
+        versionCode globalConfiguration["androidVersionCode"]
+        versionName globalConfiguration["androidVersionName"]
 
         jackOptions {
             enabled true
@@ -103,6 +103,9 @@ dependencies {
 
     compile "com.jakewharton:disklrucache:$rootProject.diskLruCacheVersion"
 
+    // refreshLayout
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
 
+    //photoview，用于图片查看
+    compile 'com.github.chrisbanes:PhotoView:2.0.0'
 }

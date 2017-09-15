@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import me.lsran.gankapp.data.api.GankService;
+import me.lsran.gankapp.model.GankApiModel;
 import me.lsran.gankapp.model.GankDataModel;
 import retrofit2.Retrofit;
 import rx.Observable;
@@ -29,7 +30,11 @@ public class GankRepository extends DataRepository {
         mGankService = serviceGenerator.create(GankService.class);
     }
 
-    public Observable<Optional<GankDataModel>> getGankData(int pageNum) {
+    public Observable<Optional<GankApiModel>> getGankData(int pageNum) {
         return transform(mGankService.getGankData(PAGE_SIZE,pageNum));
+    }
+
+    public Observable<Optional<GankApiModel>> getGankData(int pageNum,int pageSize) {
+        return transform(mGankService.getGankData(pageSize,pageNum));
     }
 }

@@ -3,7 +3,7 @@ package me.lsran.gankapp.internal.di.components;
 import dagger.Component;
 import me.lsran.gankapp.internal.di.PerActivity;
 import me.lsran.gankapp.internal.di.modules.ActivityModule;
-import me.lsran.gankapp.ui.gank.GirlFragment;
+import me.lsran.gankapp.ui.gank.fragment.GirlFragment;
 
 
 /**

@@ -8,11 +8,11 @@ ext {
     // Sdk and tools version
     androidBuildToolsVersion = "25.0.1"
     androidMinSdkVersion = 15
-    androidTargetSdkVersion = 24
-    androidCompileSdkVersion = 24
+    androidTargetSdkVersion = 25
+    androidCompileSdkVersion = 25
 
     // App dependencies version
-    supportLibraryVersion = '25.1.1'
+    supportLibraryVersion = '25.0.1'
     daggerVersion = '2.8'
     butterknifeVersion = '8.4.0'
     leakcanaryVersion = '1.5'
