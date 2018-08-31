@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">GankApp</string>
-    <string name="dialog_title_loading">请稍后</string>
-    <string name="dialog_content_loading">数据加载中</string>
-    <string name="image_browser">图片浏览器</string>
-    <string name="girl">妹子</string>
-    <string name="photo_has_save_to" >图片已保存到GankApp/images</string>
-    <integer name="page_size">10</integer>
-</resources>
