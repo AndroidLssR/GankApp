@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GankIo</string>
+    <string name="back_text">返回</string>
+    <string name="title_main">福利</string>
+    <string name="title_menu">菜单</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+</resources>

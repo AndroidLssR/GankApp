@@ -1,0 +1,31 @@
+ext {
+    // manifest 配置
+    globalManifestPlaceholders = [
+            UMENG_APP_KEY: "debug"
+    ]
+
+    debugManifestPlaceholders = [
+            UMENG_APP_KEY: "debug"
+    ]
+
+    releaseManifestPlaceholders = [
+            UMENG_APP_KEY: "release"
+    ]
+
+    // buildConfig 配置
+    globalBuildConfig = [
+            ['String', "DEVELOPER", '"lssRan"'],
+            ['int', "APP_SOURCE", '1'],
+            ['String', 'DATABASE_NAME', '"android_arch.db"'],
+            ['int', 'DATABASE_VERSION', '1'],
+            ['String', 'WX_APP_ID', '"wx1314as"'],
+            ['int', 'PAGE_SIZE', '10']
+    ]
+    debugBuildConfig = [
+            ['String', 'BASE_URL', '"http://gank.io/api/"']
+    ]
+
+    releaseBuildConfig = [
+            ['String', 'BASE_URL', '"http://gank.io/api/"']
+    ]
+}
